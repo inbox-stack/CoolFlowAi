@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CoolFlow AI — Never Miss Another HVAC Job</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #1B6CA8;
+  --blue-light: #2E86C1;
+  --blue-pale: #EBF5FB;
+  --dark: #1A1A2E;
+  --gray: #6B7280;
+  --gray-light: #F3F4F6;
+  --white: #FFFFFF;
+  --green: #10B981;
+  --border: #E5E7EB;
+}
+
+body {
+  background: var(--white);
+  color: var(--dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 68px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--dark);
+  letter-spacing: -0.5px;
+}
+
+.logo span { color: var(--blue); }
+
+.nav-btn {
+  background: var(--blue);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-btn:hover { background: var(--blue-light); }
+
+/* HERO */
+.hero {
+  padding: 140px 40px 80px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--blue-pale) 0%, white 100%);
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(27,108,168,0.1);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  color: var(--dark);
+  max-width: 760px;
+  margin: 0 auto 20px;
+}
+
+.hero h1 span { color: var(--blue); }
+
+.hero p {
+  font-size: 18px;
+  color: var(--gray);
+  max-width: 520px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-main {
+  background: var(--blue);
+  color: white;
+  padding: 16px 36px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  display: inline-block;
+}
+
+.btn-main:hover { background: var(--blue-light); transform: translateY(-1px); }
+
+.btn-outline {
+  background: white;
+  color: var(--dark);
+  padding: 16px 36px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 2px solid var(--border);
+  display: inline-block;
+  transition: border-color 0.2s;
+}
+
+.btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-box {
+  background: white;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.stat-box strong {
+  display: block;
+  font-size: 44px;
+  font-weight: 900;
+  color: var(--blue);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-box span {
+  font-size: 14px;
+  color: var(--gray);
+  font-weight: 500;
+}
+
+/* SECTION */
+.section {
+  padding: 80px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-center { text-align: center; }
+
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.section h2 {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+
+.section h2 span { color: var(--blue); }
+
+.section > p {
+  font-size: 17px;
+  color: var(--gray);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+.section-center > p { margin: 0 auto; }
+
+/* PROBLEMS */
+.problems {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.problem-card {
+  background: var(--gray-light);
+  border-radius: 14px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  transition: box-shadow 0.2s;
+}
+
+.problem-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+.problem-icon {
+  font-size: 32px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.problem-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.problem-card p {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.65;
+}
+
+/* HOW IT WORKS */
+.how-bg {
+  background: var(--gray-light);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 40px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1100px;
+  margin: 48px auto 0;
+}
+
+.step-card {
+  background: white;
+  border-radius: 14px;
+  padding: 28px 24px;
+  border: 1px solid var(--border);
+  position: relative;
+  text-align: center;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  background: var(--blue);
+  color: white;
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.step-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.step-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+
+.step-card p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
+/* DEMO */
+.demo-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  padding: 80px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.demo-text h2 { margin-bottom: 16px; }
+
+.demo-text p {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+.demo-phone {
+  background: #F9FAFB;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  max-width: 320px;
+  margin: 0 auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+}
+
+.phone-bar {
+  background: var(--blue);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phone-bar span {
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.phone-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+
+.dot-live {
+  width: 7px; height: 7px;
+  background: #4ADE80;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.phone-body { padding: 20px 16px; }
+
+.msg { margin-bottom: 12px; display: flex; flex-direction: column; }
+.msg.in { align-items: flex-start; }
+.msg.out { align-items: flex-end; }
+
+.bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.in .bubble { background: white; color: var(--dark); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.out .bubble { background: var(--blue); color: white; border-bottom-right-radius: 4px; }
+
+.msg-meta {
+  font-size: 10px;
+  color: var(--gray);
+  margin-top: 4px;
+  padding: 0 2px;
+}
+
+.ai-tag {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+}
+
+/* PRICING */
+.pricing-bg {
+  background: var(--blue-pale);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.price-card {
+  background: white;
+  border-radius: 20px;
+  padding: 48px 40px;
+  max-width: 480px;
+  margin: 48px auto 0;
+  border: 2px solid var(--blue);
+  box-shadow: 0 8px 40px rgba(27,108,168,0.12);
+}
+
+.price-tag {
+  display: inline-block;
+  background: var(--blue);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+.price-amount {
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--dark);
+  letter-spacing: -3px;
+  line-height: 1;
+}
+
+.price-amount sup { font-size: 28px; vertical-align: super; letter-spacing: 0; }
+.price-amount sub { font-size: 18px; color: var(--gray); font-weight: 500; vertical-align: baseline; letter-spacing: 0; }
+
+.price-note { font-size: 14px; color: var(--gray); margin: 10px 0 32px; }
+
+.feature-list {
+  list-style: none;
+  text-align: left;
+  margin-bottom: 36px;
+}
+
+.feature-list li {
+  font-size: 15px;
+  color: var(--dark);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.feature-list li:last-child { border-bottom: none; }
+
+.check {
+  width: 22px; height: 22px;
+  background: var(--green);
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 800;
+}
+
+.price-footer {
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 16px;
+}
+
+/* CTA */
+.cta-section {
+  padding: 80px 40px;
+  text-align: center;
+  background: var(--dark);
+}
+
+.cta-section h2 {
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 900;
+  color: white;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.cta-section h2 span { color: #60A5FA; }
+
+.cta-section p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.6);
+  max-width: 440px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+
+.btn-white {
+  background: white;
+  color: var(--dark);
+  padding: 16px 40px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.15s;
+}
+
+.btn-white:hover { transform: translateY(-2px); }
+
+/* FOOTER */
+footer {
+  background: #111827;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer .logo { font-size: 18px; }
+footer p { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .hero { padding: 100px 20px 60px; }
+  .stats { grid-template-columns: 1fr; gap: 0; }
+  .section { padding: 60px 20px; }
+  .problems { grid-template-columns: 1fr; }
+  .how-bg { padding: 60px 20px; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .demo-wrap { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; }
+  .pricing-bg { padding: 60px 20px; }
+  .price-card { padding: 32px 24px; }
+  .cta-section { padding: 60px 20px; }
+  footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">CoolFlow <span>AI</span></div>
+  <a href="#contact" class="nav-btn">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Built exclusively for HVAC companies</div>
+  <h1>Your Business Answers <span>Every Lead.</span> Even When You Can't.</h1>
+  <p>CoolFlow AI responds to every missed call and text within 60 seconds — books the appointment and follows up automatically. You focus on the job.</p>
+  <div class="hero-buttons">
+    <a href="#contact" class="btn-main">Book a Free Demo</a>
+    <a href="#how" class="btn-outline">See How It Works</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-box"><strong>78%</strong><span>of customers go with whoever responds first</span></div>
+  <div class="stat-box"><strong>$1,800</strong><span>average value of one missed HVAC job</span></div>
+  <div class="stat-box"><strong>&lt; 60s</strong><span>CoolFlow AI average response time, 24/7</span></div>
+</div>
+
+<!-- PROBLEMS -->
+<div class="section">
+  <div class="label">The Problem</div>
+  <h2>You're Losing Jobs <span>You Don't Even Know About</span></h2>
+  <p>When your team is on a job and nobody answers — that new customer doesn't wait. They call your competitor.</p>
+  <div class="problems">
+    <div class="problem-card">
+      <span class="problem-icon">📵</span>
+      <h3>Missed Calls During Jobs</h3>
+      <p>Your crew is busy. A new customer calls, nobody picks up. They move on. You never even knew they called.</p>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">⏱️</span>
+      <h3>Slow Response Loses the Job</h3>
+      <p>78% of customers hire whoever responds first. If that's not you, the job is gone — permanently.</p>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">📋</span>
+      <h3>Quotes That Go Cold</h3>
+      <p>You send a quote and move on. No follow-up means warm leads go cold and jobs that were close just disappear.</p>
+    </div>
+    <div class="problem-card">
+      <span class="problem-icon">⭐</span>
+      <h3>Not Enough Google Reviews</h3>
+      <p>Happy customers don't review unless asked. Your competitor is asking automatically — and winning online.</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-bg" id="how">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <div class="label">How It Works</div>
+    <h2 style="font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1px;color:var(--dark);margin-bottom:8px;">Simple. <span style="color:var(--blue)">Automatic. Done.</span></h2>
+    <p style="font-size:17px;color:var(--gray);max-width:480px;margin:0 auto;">We set it up once. It runs forever. You don't touch a thing.</p>
+  </div>
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-number">1</div>
+      <span class="step-icon">📞</span>
+      <h3>Customer Contacts You</h3>
+      <p>Call, text, or form — any time of day or night. CoolFlow AI catches every single one.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">2</div>
+      <span class="step-icon">⚡</span>
+      <h3>AI Responds in Seconds</h3>
+      <p>An instant text goes out introducing your business and asking what they need. Lead stays alive.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">3</div>
+      <span class="step-icon">📅</span>
+      <h3>Appointment Gets Booked</h3>
+      <p>AI qualifies them and books directly into your calendar. No back-and-forth. No human needed.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">4</div>
+      <span class="step-icon">⭐</span>
+      <h3>Review Requested Automatically</h3>
+      <p>After the job, the system texts the customer asking for a Google review. Your rating grows on its own.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO -->
+<div class="demo-wrap">
+  <div class="demo-text">
+    <div class="label">Live Demo</div>
+    <h2 style="font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1px;color:var(--dark);margin-bottom:16px;">See a Real <span style="color:var(--blue)">AI Conversation</span></h2>
+    <p>This is exactly what happens when a customer texts your business and nobody is available. The AI handles it start to finish — while you're on a job.</p>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:28px;font-size:13px;color:var(--green);font-weight:600;">
+      <span class="dot-live"></span> System Active 24/7
+    </div>
+    <a href="#contact" class="btn-main">Get This For My Business</a>
+  </div>
+
+  <div class="demo-phone">
+    <div class="phone-bar">
+      <span>CoolFlow AI</span>
+      <div class="phone-live"><span class="dot-live"></span> Live</div>
+    </div>
+    <div class="phone-body">
+      <div class="msg in">
+        <div class="bubble">Hey, my AC stopped working. Are you available today?</div>
+        <div class="msg-meta">2:14 PM</div>
+      </div>
+      <div class="msg out">
+        <div class="ai-tag">⚡ CoolFlow AI</div>
+        <div class="bubble">Hi! Thanks for reaching out. Is this for a residential or commercial property, and what type of unit do you have?</div>
+        <div class="msg-meta">2:14 PM — Instant</div>
+      </div>
+      <div class="msg in">
+        <div class="bubble">Residential. 3-ton Carrier. Just stopped cooling.</div>
+        <div class="msg-meta">2:16 PM</div>
+      </div>
+      <div class="msg out">
+        <div class="ai-tag">⚡ CoolFlow AI</div>
+        <div class="bubble">We have today 4–6 PM or tomorrow 8–10 AM. Which works best for you?</div>
+        <div class="msg-meta">2:16 PM — Instant</div>
+      </div>
+      <div class="msg in">
+        <div class="bubble">Today at 4 works perfect</div>
+        <div class="msg-meta">2:17 PM</div>
+      </div>
+      <div class="msg out">
+        <div class="ai-tag">⚡ CoolFlow AI</div>
+        <div class="bubble">You're booked ✓ Today at 4 PM. Tech will call 30 min before. See you soon!</div>
+        <div class="msg-meta">2:17 PM — Instant</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-bg" id="pricing">
+  <div class="label">Simple Pricing</div>
+  <h2 style="font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1px;color:var(--dark);margin-bottom:12px;">One Price. <span style="color:var(--blue)">Everything Included.</span></h2>
+  <p style="font-size:17px;color:var(--gray);max-width:440px;margin:0 auto;">No setup fees. No contracts. One recovered job pays for 18 months of CoolFlow AI.</p>
+  <div class="price-card">
+    <div class="price-tag">Full Access Plan</div>
+    <div class="price-amount"><sup>$</sup>100<sub>/mo</sub></div>
+    <p class="price-note">No setup fee. Cancel anytime.</p>
+    <ul class="feature-list">
+      <li><span class="check">✓</span> AI lead response — under 60 seconds, 24/7</li>
+      <li><span class="check">✓</span> Missed call text-back system</li>
+      <li><span class="check">✓</span> Automatic appointment booking</li>
+      <li><span class="check">✓</span> Lead qualification flow</li>
+      <li><span class="check">✓</span> Lead pipeline dashboard</li>
+      <li><span class="check">✓</span> Automated Google review requests</li>
+      <li><span class="check">✓</span> Full setup — we do it for you</li>
+    </ul>
+    <a href="#contact" class="btn-main" style="display:block;text-align:center;width:100%;font-size:16px;">Get Started Today</a>
+    <p class="price-footer">Questions? Call or text us anytime.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Ready to Stop <span>Losing Jobs?</span></h2>
+  <p>Takes 20 minutes. We'll show you exactly how it works for your business — no pressure.</p>
+  <a href="tel:+13055550100" class="btn-white">Call or Text to Get Started</a>
+  <p style="margin-top:16px;font-size:13px;color:rgba(255,255,255,0.4);">We respond fast. Obviously.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo" style="color:white;">CoolFlow <span>AI</span></div>
+  <p>© 2026 CoolFlow AI — Miami, FL</p>
+  <p>Built for HVAC pros.</p>
+</footer>
+
+</body>
+</html
